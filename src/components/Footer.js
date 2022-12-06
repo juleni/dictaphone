@@ -5,11 +5,12 @@ export default function Footer() {
   return (
     <div className="microphone-footer-container-in">
       <div className="footer-header">
-        <span>Commands</span>
+        <span>Voice Commands</span>
       </div>
       <div className="microphone-footer-container">
         <span className="microphone-footer-text">
           <ul>
+            <li>SAVE</li>
             <li>RESET</li>
             <li>CHANGE BACKGROUND COLOR TO &lt;color&gt;</li>
             <li>RESET BACKGROUND COLOR</li>

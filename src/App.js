@@ -27,7 +27,12 @@ function App() {
         handleReset();
       },
     },
-    ,
+    {
+      command: "save",
+      callback: () => {
+        handleSave();
+      },
+    },
     {
       command: "reset background color",
       callback: () => {
@@ -83,8 +88,18 @@ function App() {
     setIsButtonDisabled(true);
   };
   const handleSave = () => {
-    alert("SAVING");
+    exporTranscript(transcript);
   };
+
+  function exporTranscript(input) {
+    const fileData = JSON.stringify(input);
+    const blob = new Blob([fileData], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.download = "export-transcript.txt";
+    link.href = url;
+    link.click();
+  }
 
   return (
     <div className="main-container">
@@ -122,7 +137,7 @@ function App() {
                 ref={microphoneResetButtonRef}
                 disabled={isButtonDisabled}
               >
-                Reset
+                Reset Transcript
               </button>
               <button
                 className={
@@ -133,7 +148,7 @@ function App() {
                 onClick={handleSave}
                 disabled={isButtonDisabled}
               >
-                Save
+                Save to file
               </button>
             </div>
           </div>
