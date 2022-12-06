@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -37,7 +37,19 @@ function App() {
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
   const [isListening, setIsListening] = useState(false);
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const microphoneRef = useRef(null);
+  const microphoneStatusRef = useRef(null);
+  const microphoneResetButtonRef = useRef(null);
+
+  useEffect(() => {
+    if (transcript && transcript.length > 0) {
+      setIsButtonDisabled(false);
+    } else {
+      setIsButtonDisabled(true);
+    }
+  }, [transcript]);
+
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return (
       <div className="mircophone-container">
@@ -45,24 +57,34 @@ function App() {
       </div>
     );
   }
-  const handleListing = () => {
-    setIsListening(true);
-    console.log("CL");
-    console.log(microphoneRef.current.classList);
-    microphoneRef.current.classList.add("listening");
-    SpeechRecognition.startListening({
-      continuous: true,
-    });
+
+  const handleListening = () => {
+    if (isListening) {
+      stopHandle();
+    } else {
+      setIsListening(true);
+      microphoneRef.current.classList.add("listening");
+      microphoneStatusRef.current.classList.add("listening");
+      SpeechRecognition.startListening({
+        continuous: true,
+      });
+    }
   };
   const stopHandle = () => {
     setIsListening(false);
     microphoneRef.current.classList.remove("listening");
+    microphoneStatusRef.current.classList.remove("listening");
     SpeechRecognition.stopListening();
   };
   const handleReset = () => {
-    stopHandle();
+    //stopHandle();
     resetTranscript();
+    setIsButtonDisabled(true);
   };
+  const handleSave = () => {
+    alert("SAVING");
+  };
+
   return (
     <div className="main-container">
       {/** Header */}
@@ -73,29 +95,48 @@ function App() {
           <div
             className="microphone-icon-container"
             ref={microphoneRef}
-            onClick={handleListing}
+            onClick={handleListening}
           >
             <img src={microPhoneIcon} className="microphone-icon" />
           </div>
-          <div className="microphone-status">
-            {isListening
-              ? "Click to STOP Listening"
-              : "Click to START Listening"}
+          <div className="microphone-status" ref={microphoneStatusRef}>
+            {isListening ? "STOP Listening" : "START Listening"}
           </div>
-          {isListening && (
-            <button className="microphone-stop btn" onClick={stopHandle}>
-              Stop
-            </button>
-          )}
         </div>
-        {transcript && (
+        {/** Transcript */}
+        <div className="microphone-result-container-in">
+          <div className="microphone-transcript">
+            <span>Transcript</span>
+          </div>
           <div className="microphone-result-container">
             <div className="microphone-result-text">{transcript}</div>
-            <button className="microphone-reset btn" onClick={handleReset}>
-              Reset
-            </button>
+            <div>
+              <button
+                className={
+                  isButtonDisabled
+                    ? "microphone-reset.disabled btn"
+                    : "microphone-reset btn"
+                }
+                onClick={handleReset}
+                ref={microphoneResetButtonRef}
+                disabled={isButtonDisabled}
+              >
+                Reset
+              </button>
+              <button
+                className={
+                  isButtonDisabled
+                    ? "microphone-save.disabled btn"
+                    : "microphone-save btn"
+                }
+                onClick={handleSave}
+                disabled={isButtonDisabled}
+              >
+                Save
+              </button>
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
