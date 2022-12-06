@@ -1,0 +1,33 @@
+.footer-container {
+  display: flex;
+  color: bisque;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 20vh;
+  font-family: "Nerko One", cursive;
+}
+.microphone-footer-container {
+  text-align: left;
+  height: 15vh;
+  background-color: #ffffff81;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+  margin: 0 5vw 0 5vw;
+}
+.footer-header {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 6vw;
+  font-size: 2em;
+  color: #848383;
+}
+.microphone-footer-text {
+  margin-top: 20px;
+  margin-left: 80px;
+  font-family: "Source Code Pro", monospace;
+  font-size: 2em;
+}

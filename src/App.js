@@ -3,6 +3,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import "./App.css";
+import Footer from "./components/Footer";
 import Header from "./components/Header";
 import microPhoneIcon from "./microphone.svg";
 
@@ -137,6 +138,8 @@ function App() {
             </div>
           </div>
         </div>
+        {/** Footer */}
+        <Footer />
       </div>
     </div>
   );
