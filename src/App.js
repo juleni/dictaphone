@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useSpeechSynthesis } from "react-speech-kit";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -43,8 +44,9 @@ function App() {
   ];
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
+  const { speak } = useSpeechSynthesis();
   const [isListening, setIsListening] = useState(false);
-  const [isSpeeching, setIsSpeeching] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const microphoneRef = useRef(null);
   const microphoneStatusRef = useRef(null);
@@ -80,17 +82,14 @@ function App() {
       });
     }
   };
-  const handleSpeeching = () => {
-    if (isSpeeching) {
-      stopHandleSpeech();
+  const handleSpeaking = () => {
+    if (isSpeaking) {
+      stopHandleSpeak();
     } else {
-      setIsSpeeching(true);
+      setIsSpeaking(true);
       speakerRef.current.classList.add("listening");
       speakerStatusRef.current.classList.add("listening");
-      // TODO: Handle
-      //SpeechRecognition.startListening({
-      //   continuous: true,
-      // });
+      speak({ text: transcript });
     }
   };
   const stopHandle = () => {
@@ -99,12 +98,11 @@ function App() {
     microphoneStatusRef.current.classList.remove("listening");
     SpeechRecognition.stopListening();
   };
-  const stopHandleSpeech = () => {
-    setIsSpeeching(false);
+  const stopHandleSpeak = () => {
+    setIsSpeaking(false);
     speakerRef.current.classList.remove("listening");
     speakerStatusRef.current.classList.remove("listening");
-    // TODO
-    //SpeechRecognition.stopListening();
+    // TODO: Stop speaking
   };
   const handleReset = () => {
     //stopHandle();
@@ -147,11 +145,11 @@ function App() {
           <div
             className="icon-container speaker-icon-container"
             ref={speakerRef}
-            onClick={handleSpeeching}
+            onClick={handleSpeaking}
           >
             <img src={speakerIcon} className="microphone-icon" />
             <div className="speaker-status" ref={speakerStatusRef}>
-              {isSpeeching ? "STOP Speeching" : "START Speeching"}
+              {isSpeaking ? "STOP Speeching" : "START Speeching"}
             </div>
           </div>
         </div>
