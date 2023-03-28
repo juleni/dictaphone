@@ -71,6 +71,7 @@ function App() {
   }
 
   const handleListening = () => {
+    stopHandleSpeak();
     if (isListening) {
       stopHandle();
     } else {
@@ -83,6 +84,7 @@ function App() {
     }
   };
   const handleSpeaking = () => {
+    stopHandle();
     if (isSpeaking) {
       stopHandleSpeak();
     } else {
@@ -93,6 +95,7 @@ function App() {
     }
   };
   const stopHandle = () => {
+    setIsSpeaking(false);
     setIsListening(false);
     microphoneRef.current.classList.remove("listening");
     microphoneStatusRef.current.classList.remove("listening");
@@ -100,6 +103,7 @@ function App() {
   };
   const stopHandleSpeak = () => {
     setIsSpeaking(false);
+    setIsListening(false);
     speakerRef.current.classList.remove("listening");
     speakerStatusRef.current.classList.remove("listening");
     // TODO: Stop speaking
@@ -149,7 +153,7 @@ function App() {
           >
             <img src={speakerIcon} className="microphone-icon" />
             <div className="speaker-status" ref={speakerStatusRef}>
-              {isSpeaking ? "STOP Speeching" : "START Speeching"}
+              {isSpeaking ? "STOP Speaking" : "START Speaking"}
             </div>
           </div>
         </div>
