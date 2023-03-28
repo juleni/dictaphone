@@ -92,6 +92,7 @@ function App() {
       microphoneStatusRef.current.classList.add("listening");
       SpeechRecognition.startListening({
         continuous: true,
+        language: "sk",
       });
     }
   };
@@ -230,7 +231,7 @@ function App() {
           >
             {voices.map((option, index) => (
               <option key={option.voiceURI} value={index}>
-                {`${option.lang} - ${option.name} ${
+                {`${option.lang} - ${option.name.slice(0, 40)} ${
                   option.default ? "- Default" : ""
                 }`}
               </option>
