@@ -36,7 +36,7 @@ function App() {
     {
       command: "reset background color",
       callback: () => {
-        document.body.style.background = `rgba(0, 0, 0, 0.8)`;
+        document.body.style.background = `rgba(167, 220, 246, 0.8)`;
       },
     },
   ];
@@ -116,13 +116,15 @@ function App() {
             <img src={microPhoneIcon} className="microphone-icon" />
           </div>
           <div className="microphone-status" ref={microphoneStatusRef}>
-            {isListening ? "STOP Listening" : "START Listening"}
+            {isListening
+              ? "ＳＴＯＰ Ｌｉｓｔｅｎｉｎｇ"
+              : "ＳＴＡＲＴ Ｌｉｓｔｅｎｉｎｇ"}
           </div>
         </div>
         {/** Transcript */}
         <div className="microphone-result-container-in">
           <div className="microphone-transcript">
-            <span>Transcript</span>
+            <span>🇹‌🇷‌🇦‌🇳‌🇸‌🇨‌🇷‌🇮‌🇵‌🇹‌</span>
           </div>
           <div className="microphone-result-container">
             <div className="microphone-result-text">{transcript}</div>
@@ -137,7 +139,7 @@ function App() {
                 ref={microphoneResetButtonRef}
                 disabled={isButtonDisabled}
               >
-                Reset Transcript
+                🇷‌🇪‌🇸‌🇪‌🇹‌ 🇹‌🇷‌🇦‌🇳‌🇸‌🇨‌🇷‌🇮‌🇵‌🇹‌
               </button>
               <button
                 className={
@@ -148,7 +150,7 @@ function App() {
                 onClick={handleSave}
                 disabled={isButtonDisabled}
               >
-                Save to file
+                🇸‌🇦‌🇻‌🇪‌ 🇹‌🇴‌ 🇫‌🇮‌🇱‌🇪‌
               </button>
             </div>
           </div>

@@ -1,34 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Nerko+One&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
-
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Nerko One", cursive;
 }
 body {
-  background-color: rgba(0, 0, 0, 0.8);
-  color: bisque;
+  background-color: rgba(167, 220, 246, 0.8);
+  color: rgb(58, 132, 216);
 }
 .main-container {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
 }
-
+.microphone-wrapper {
+  padding-bottom: 5px;
+}
 .mircophone-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100vw;
-  height: 15vh;
+  margin: 20px 0 20px 0;
 }
 .microphone-icon-container {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: 10%;
   background-image: linear-gradient(128deg, #cce9b3, #46bd1b);
   padding: 20px;
   margin-right: 20px;
@@ -40,14 +34,14 @@ body {
 }
 .microphone-icon-container.listening::before {
   content: "";
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   background-color: #ffffff81;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(1.4);
-  border-radius: 50%;
+  border-radius: 20%;
   animation: listening infinite 1.5s;
 }
 @keyframes listening {
@@ -68,8 +62,7 @@ body {
   display: flex;
   font-size: 2em;
   color: #46bd1b;
-  margin-right: 20px;
-  min-width: 215px;
+  min-width: 300px;
 }
 .microphone-status.listening {
   color: #e14110;
@@ -77,18 +70,19 @@ body {
 .btn {
   border: none;
   padding: 10px 30px;
+  padding-bottom: 12px;
   margin-right: 10px;
   outline: none;
-
+  background-color: #c4dce3;
   font-size: 20px;
-  border-radius: 25px;
+  border-radius: 3px;
   box-shadow: 0px 0px 10px 5px #ffffff1a;
 }
 .microphone-result-container {
   text-align: center;
   height: 40vh;
   background-color: #ffffff81;
-  border-radius: 10px;
+  border-radius: 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -100,8 +94,8 @@ body {
   display: flex;
   flex-direction: column;
   margin: 0 0 0 6vw;
-  font-size: 2em;
-  color: #848383;
+  font-size: 2.5em;
+  color: #2a498b;
 }
 
 .microphone-result-text {
@@ -110,26 +104,22 @@ body {
   font-size: 1.5em;
 }
 .microphone-reset {
-  border: 2px solid rgb(72, 74, 72);
-  background: rgb(217, 209, 209);
+  background: rgb(153, 174, 243);
   color: rgb(12, 95, 19);
   width: fit-content;
 }
 .microphone-reset:hover {
-  border: 2px solid rgb(72, 74, 72);
-  background: rgb(198, 195, 195);
+  background: rgb(140, 164, 240);
   color: rgb(24, 120, 32);
   cursor: pointer;
 }
 .microphone-save {
-  border: 2px solid rgb(72, 74, 72);
-  background: rgb(217, 209, 209);
+  background: rgb(153, 174, 243);
   color: rgb(12, 95, 19);
   width: fit-content;
 }
 .microphone-save:hover {
-  border: 2px solid rgb(72, 74, 72);
-  background: rgb(198, 195, 195);
+  background: rgb(140, 164, 240);
   color: rgb(24, 120, 32);
   cursor: pointer;
 }
@@ -153,5 +143,22 @@ body {
     padding: 10px 20px;
 
     font-size: 14px;
+  }
+}
+@media (max-width: 800px) {
+  .microphone-transcript {
+    font-size: 2em;
+  }
+  .microphone-status {
+    font-size: 1.5em;
+  }
+  .microphone-icon-container {
+    width: 60px;
+    height: 60px;
+  }
+}
+@media (max-width: 500px) {
+  .microphone-status {
+    display: none;
   }
 }

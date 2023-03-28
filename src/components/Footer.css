@@ -1,17 +1,13 @@
 .footer-container {
   display: flex;
-  color: bisque;
-  justify-content: center;
-  align-items: center;
   width: 100vw;
   height: 20vh;
-  font-family: "Nerko One", cursive;
 }
 .microphone-footer-container {
   text-align: left;
   height: 18vh;
   background-color: #ffffff81;
-  border-radius: 10px;
+  border-radius: 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -22,13 +18,12 @@
 .footer-header {
   display: flex;
   flex-direction: column;
-  margin: 0 0 0 6vw;
-  font-size: 2em;
-  color: #848383;
+  margin: 0 0 0 5.5vw;
+  font-size: 2.5em;
+  color: #2a498b;
 }
 .microphone-footer-text {
-  margin: 20px 80px;
-  font-family: "Source Code Pro", monospace;
+  margin: 20px 60px;
   font-size: 2em;
 }
 
@@ -45,12 +40,22 @@
 }
 @media (max-width: 600px) {
   li {
-    font-size: 0.6em;
+    font-size: 0.7em;
+  }
+}
+@media (max-width: 540px) {
+  li {
+    font-size: 0.5em;
+  }
+}
+@media (max-width: 430px) {
+  li {
+    font-size: 0.4em;
   }
 }
 
-@media (max-width: 420px) {
-  li {
-    font-size: 0.4em;
+@media (max-width: 800px) {
+  .footer-header {
+    font-size: 2em;
   }
 }
