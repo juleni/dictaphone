@@ -1,14 +1,15 @@
 {
   "files": {
-    "main.css": "/dictaphone/static/css/main.f25b2b29.css",
-    "main.js": "/dictaphone/static/js/main.3bbda51e.js",
+    "main.css": "/dictaphone/static/css/main.c9296e3d.css",
+    "main.js": "/dictaphone/static/js/main.28add3d6.js",
+    "static/media/speaker.svg": "/dictaphone/static/media/speaker.fc2be1d3ef96f8bbadbdf0ea140faf9e.svg",
     "static/media/microphone.svg": "/dictaphone/static/media/microphone.e9ec65e6efa31437ce5a3f4e523fcf9a.svg",
     "index.html": "/dictaphone/index.html",
-    "main.f25b2b29.css.map": "/dictaphone/static/css/main.f25b2b29.css.map",
-    "main.3bbda51e.js.map": "/dictaphone/static/js/main.3bbda51e.js.map"
+    "main.c9296e3d.css.map": "/dictaphone/static/css/main.c9296e3d.css.map",
+    "main.28add3d6.js.map": "/dictaphone/static/js/main.28add3d6.js.map"
   },
   "entrypoints": [
-    "static/css/main.f25b2b29.css",
-    "static/js/main.3bbda51e.js"
+    "static/css/main.c9296e3d.css",
+    "static/js/main.28add3d6.js"
   ]
 }
