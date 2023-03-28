@@ -177,6 +177,15 @@ body {
   color: rgb(54, 57, 54);
 }
 
+.speechSettings {
+  display: grid;
+  grid-gap: 15px;
+}
+
+.speechSettings > select {
+  height: 30px;
+}
+
 @media (max-width: 420px) {
   li {
     font-size: 0.4em;

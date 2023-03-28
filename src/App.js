@@ -4,9 +4,11 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import "./App.css";
+import Dialog from "./components/Dialog";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import microPhoneIcon from "./microphone.svg";
+import settingsIcon from "./settings.svg";
 import speakerIcon from "./speaker.svg";
 
 function App() {
@@ -43,16 +45,26 @@ function App() {
     },
   ];
 
+  const onEnd = () => {
+    stopHandleSpeak();
+  };
+
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
-  const { speak } = useSpeechSynthesis();
+  const { speak, cancel, speaking, supported, voices } = useSpeechSynthesis({
+    onEnd,
+  });
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [showSpeechSettings, setShowSpeechSettings] = useState(false);
+  const [voiceIndex, setVoiceIndex] = useState(null);
   const microphoneRef = useRef(null);
   const microphoneStatusRef = useRef(null);
   const microphoneResetButtonRef = useRef(null);
   const speakerRef = useRef(null);
   const speakerStatusRef = useRef(null);
+
+  const voice = voices[voiceIndex] || null;
 
   useEffect(() => {
     if (transcript && transcript.length > 0) {
@@ -91,7 +103,7 @@ function App() {
       setIsSpeaking(true);
       speakerRef.current.classList.add("listening");
       speakerStatusRef.current.classList.add("listening");
-      speak({ text: transcript });
+      speak({ text: transcript, voice });
     }
   };
   const stopHandle = () => {
@@ -106,7 +118,7 @@ function App() {
     setIsListening(false);
     speakerRef.current.classList.remove("listening");
     speakerStatusRef.current.classList.remove("listening");
-    // TODO: Stop speaking
+    cancel();
   };
   const handleReset = () => {
     //stopHandle();
@@ -133,6 +145,7 @@ function App() {
       <Header />
       {/** Microphone & Speaker */}
       <div className="microphone-wrapper">
+        {supported && <div className="speechMenu"></div>}
         <div className="microphone-container">
           {/** Microphone */}
           <div
@@ -160,7 +173,14 @@ function App() {
         {/** Transcript */}
         <div className="microphone-result-container-in">
           <div className="microphone-transcript">
-            <span>TRANSCRIPT</span>
+            <span>
+              TRANSCRIPT{" "}
+              <img
+                src={settingsIcon}
+                className="settings-icon"
+                onClick={() => setShowSpeechSettings(true)}
+              />
+            </span>
           </div>
           <div className="microphone-result-container">
             <div className="microphone-result-text">{transcript}</div>
@@ -194,6 +214,30 @@ function App() {
         {/** Footer */}
         <Footer />
       </div>
+
+      <Dialog
+        open={showSpeechSettings}
+        onClose={() => setShowSpeechSettings(false)}
+      >
+        <div className="speechSettings">
+          {/* VOices -- browser dependent */}
+          <select
+            name="voice"
+            value={voiceIndex || ""}
+            onChange={(e) => {
+              setVoiceIndex(e.target.value);
+            }}
+          >
+            {voices.map((option, index) => (
+              <option key={option.voiceURI} value={index}>
+                {`${option.lang} - ${option.name} ${
+                  option.default ? "- Default" : ""
+                }`}
+              </option>
+            ))}
+          </select>
+        </div>
+      </Dialog>
     </div>
   );
 }
