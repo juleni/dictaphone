@@ -116,15 +116,13 @@ function App() {
             <img src={microPhoneIcon} className="microphone-icon" />
           </div>
           <div className="microphone-status" ref={microphoneStatusRef}>
-            {isListening
-              ? "ＳＴＯＰ Ｌｉｓｔｅｎｉｎｇ"
-              : "ＳＴＡＲＴ Ｌｉｓｔｅｎｉｎｇ"}
+            {isListening ? "STOP Listening" : "START Listening"}
           </div>
         </div>
         {/** Transcript */}
         <div className="microphone-result-container-in">
           <div className="microphone-transcript">
-            <span>🇹‌🇷‌🇦‌🇳‌🇸‌🇨‌🇷‌🇮‌🇵‌🇹‌</span>
+            <span>TRANSCRIPT</span>
           </div>
           <div className="microphone-result-container">
             <div className="microphone-result-text">{transcript}</div>
@@ -139,7 +137,7 @@ function App() {
                 ref={microphoneResetButtonRef}
                 disabled={isButtonDisabled}
               >
-                🇷‌🇪‌🇸‌🇪‌🇹‌ 🇹‌🇷‌🇦‌🇳‌🇸‌🇨‌🇷‌🇮‌🇵‌🇹‌
+                RESET
               </button>
               <button
                 className={
@@ -150,7 +148,7 @@ function App() {
                 onClick={handleSave}
                 disabled={isButtonDisabled}
               >
-                🇸‌🇦‌🇻‌🇪‌ 🇹‌🇴‌ 🇫‌🇮‌🇱‌🇪‌
+                SAVE TO FILE
               </button>
             </div>
           </div>

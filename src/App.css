@@ -70,11 +70,11 @@ body {
 .btn {
   border: none;
   padding: 10px 30px;
-  padding-bottom: 12px;
   margin-right: 10px;
   outline: none;
-  background-color: #c4dce3;
-  font-size: 20px;
+  background-color: rgb(200, 206, 207);
+  color: grey;
+  font-size: 15px;
   border-radius: 3px;
   box-shadow: 0px 0px 10px 5px #ffffff1a;
 }
@@ -96,6 +96,7 @@ body {
   margin: 0 0 0 6vw;
   font-size: 2.5em;
   color: #2a498b;
+  margin-bottom: 5px;
 }
 
 .microphone-result-text {
@@ -125,13 +126,13 @@ body {
 }
 
 .microphone-reset.disabled {
-  border: 1px solid rgb(217, 209, 209);
+  border: rgb(217, 209, 209);
   color: rgb(54, 57, 54);
   cursor: none;
 }
 
 .microphone-save.disabled {
-  border: 1px solid rgb(217, 209, 209);
+  border: rgb(217, 209, 209);
   color: rgb(54, 57, 54);
 }
 
@@ -141,13 +142,11 @@ body {
   }
   .btn {
     padding: 10px 20px;
-
-    font-size: 14px;
   }
 }
 @media (max-width: 800px) {
   .microphone-transcript {
-    font-size: 2em;
+    font-size: 1.5em;
   }
   .microphone-status {
     font-size: 1.5em;
@@ -157,8 +156,14 @@ body {
     height: 60px;
   }
 }
-@media (max-width: 500px) {
+@media (max-width: 490px) {
   .microphone-status {
     display: none;
+  }
+  .microphone-transcript {
+    font-size: 1em;
+  }
+  .btn {
+    padding: 10px 20px;
   }
 }
