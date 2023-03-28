@@ -6,6 +6,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import microPhoneIcon from "./microphone.svg";
+import speakerIcon from "./speaker.svg";
 
 function App() {
   const commands = [
@@ -43,10 +44,13 @@ function App() {
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
   const [isListening, setIsListening] = useState(false);
+  const [isSpeeching, setIsSpeeching] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const microphoneRef = useRef(null);
   const microphoneStatusRef = useRef(null);
   const microphoneResetButtonRef = useRef(null);
+  const speakerRef = useRef(null);
+  const speakerStatusRef = useRef(null);
 
   useEffect(() => {
     if (transcript && transcript.length > 0) {
@@ -76,11 +80,31 @@ function App() {
       });
     }
   };
+  const handleSpeeching = () => {
+    if (isSpeeching) {
+      stopHandleSpeech();
+    } else {
+      setIsSpeeching(true);
+      speakerRef.current.classList.add("listening");
+      speakerStatusRef.current.classList.add("listening");
+      // TODO: Handle
+      //SpeechRecognition.startListening({
+      //   continuous: true,
+      // });
+    }
+  };
   const stopHandle = () => {
     setIsListening(false);
     microphoneRef.current.classList.remove("listening");
     microphoneStatusRef.current.classList.remove("listening");
     SpeechRecognition.stopListening();
+  };
+  const stopHandleSpeech = () => {
+    setIsSpeeching(false);
+    speakerRef.current.classList.remove("listening");
+    speakerStatusRef.current.classList.remove("listening");
+    // TODO
+    //SpeechRecognition.stopListening();
   };
   const handleReset = () => {
     //stopHandle();
@@ -105,18 +129,30 @@ function App() {
     <div className="main-container">
       {/** Header */}
       <Header />
-      {/** Microphone */}
+      {/** Microphone & Speaker */}
       <div className="microphone-wrapper">
-        <div className="mircophone-container">
+        <div className="microphone-container">
+          {/** Microphone */}
           <div
-            className="microphone-icon-container"
+            className="icon-container microphone-icon-container"
             ref={microphoneRef}
             onClick={handleListening}
           >
             <img src={microPhoneIcon} className="microphone-icon" />
+            <div className="microphone-status" ref={microphoneStatusRef}>
+              {isListening ? "STOP Listening" : "START Listening"}
+            </div>
           </div>
-          <div className="microphone-status" ref={microphoneStatusRef}>
-            {isListening ? "STOP Listening" : "START Listening"}
+          {/** Speaker */}
+          <div
+            className="icon-container speaker-icon-container"
+            ref={speakerRef}
+            onClick={handleSpeeching}
+          >
+            <img src={speakerIcon} className="microphone-icon" />
+            <div className="speaker-status" ref={speakerStatusRef}>
+              {isSpeeching ? "STOP Speeching" : "START Speeching"}
+            </div>
           </div>
         </div>
         {/** Transcript */}
