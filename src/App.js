@@ -45,13 +45,13 @@ function App() {
     },
   ];
 
-  const onEndSpeaking = () => {
+  const onEnd = () => {
     stopHandleSpeak();
   };
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
   const { speak, cancel, speaking, supported, voices } = useSpeechSynthesis({
-    onEndSpeaking,
+    onEnd,
   });
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
