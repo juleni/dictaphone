@@ -45,13 +45,13 @@ function App() {
     },
   ];
 
-  const onEnd = () => {
+  const onEndSpeaking = () => {
     stopHandleSpeak();
   };
 
   const { transcript, resetTranscript } = useSpeechRecognition({ commands });
   const { speak, cancel, speaking, supported, voices } = useSpeechSynthesis({
-    onEnd,
+    onEndSpeaking,
   });
   const [isListening, setIsListening] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
@@ -63,6 +63,17 @@ function App() {
   const microphoneResetButtonRef = useRef(null);
   const speakerRef = useRef(null);
   const speakerStatusRef = useRef(null);
+
+  const languagesArray = [
+    "sk-SK",
+    "en-US",
+    "de-DE",
+    "es-ES",
+    "it-IT",
+    "fr-FR",
+    "pl-PL",
+    "ru-RU",
+  ];
 
   const voice = voices[voiceIndex] || null;
 
@@ -92,7 +103,7 @@ function App() {
       microphoneStatusRef.current.classList.add("listening");
       SpeechRecognition.startListening({
         continuous: true,
-        language: "sk",
+        language: "sk-SK",
       });
     }
   };
@@ -229,13 +240,15 @@ function App() {
               setVoiceIndex(e.target.value);
             }}
           >
-            {voices.map((option, index) => (
-              <option key={option.voiceURI} value={index}>
-                {`${option.lang} - ${option.name.slice(0, 40)} ${
-                  option.default ? "- Default" : ""
-                }`}
-              </option>
-            ))}
+            {voices
+              .filter((option) => languagesArray.includes(option.lang))
+              .map((option, index) => (
+                <option key={option.voiceURI} value={index}>
+                  {`${option.lang} - ${option.name.slice(0, 40)} ${
+                    option.default ? "- Default" : ""
+                  }`}
+                </option>
+              ))}
           </select>
         </div>
       </Dialog>
